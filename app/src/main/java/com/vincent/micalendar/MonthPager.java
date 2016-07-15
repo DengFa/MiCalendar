@@ -54,7 +54,7 @@ public class MonthPager extends ViewPager {
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         Log.d(TAG, "onSizeChanged: " + String.format("w=%s, h = %s, oldw = %s, oldh=%s", w, h, oldw, oldh));
-        mCellSpace = Math.min(h / 6, w / 7);
+        mCellSpace = w / 7;
         super.onSizeChanged(w, h, oldw, oldh);
     }
 

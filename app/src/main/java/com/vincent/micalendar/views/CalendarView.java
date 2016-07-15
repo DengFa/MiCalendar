@@ -142,7 +142,7 @@ public class CalendarView extends View {
         super.onSizeChanged(w, h, oldw, oldh);
         mViewWidth = w;
         mViewHight = h;
-        mCellSpace = Math.min(mViewHight / TOTAL_ROW, mViewWidth / TOTAL_COL);
+        mCellSpace = mViewWidth / TOTAL_COL;
         if (!callBackCellSpace) {
             if (mOnCellCallBack != null) {
                 mOnCellCallBack.onMesureCellHeight(mCellSpace);
@@ -255,6 +255,9 @@ public class CalendarView extends View {
                     break;
                 case TODAY:
                     mTextPaint.setColor(getResources().getColor(R.color.data_month_day_selected));
+                    canvas.drawCircle((float) (mCellSpace * (i + 0.5)),
+                            (float) ((j + 0.5) * mCellSpace), mCellSpace / 3, mCirclePaint);
+                    mClickedCell = this;
                     break;
                 case CLICK_DAY:
                     mTextPaint.setColor(getResources().getColor(R.color.data_month_day_selected));
@@ -276,7 +279,7 @@ public class CalendarView extends View {
                     mLunarTextPaint);
             //draw mark
             if ((j * TOTAL_COL + i) % 10 == 0) {
-                canvas.drawCircle((float) (mCellSpace * (i + 0.5)), (float) ((j + 1) * mCellSpace) - 6, 4, mMarkCirclePaint);
+                canvas.drawCircle((float) (mCellSpace * (i + 0.5)), (float) ((j + 1) * mCellSpace) - 12, 8, mMarkCirclePaint);
             }
         }
     }
@@ -476,7 +479,6 @@ public class CalendarView extends View {
                 }
             }
         }
-
     }
 
     public void setInitPage() {

@@ -21,7 +21,7 @@
         <com.vincent.micalendar.MonthPager
             android:id="@+id/vp_calendar"
             android:layout_width="match_parent"
-            android:layout_height="306dp">
+            android:layout_height="wrap_content">
         </com.vincent.micalendar.MonthPager>
 
         <android.support.v7.widget.RecyclerView

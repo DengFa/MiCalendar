@@ -1,16 +1,18 @@
 package com.vincent.micalendar;
 
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.vincent.micalendar.adpter.CalendarViewAdapter;
@@ -24,37 +26,41 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private CalendarView[]                    mShowViews;
     private CalendarViewAdapter<CalendarView> adapter;
 
-    private RecyclerView rvToDoList;
-    private TextView textViewYearDisplay;
-    private TextView textViewMonthDisplay;
-    private TextView textViewWeekDisplay;
-    private TextView monthCalendarView;
-    private TextView weekCalendarView;
-    private CircleTextView today;
-    private CalendarView[] viewsMonth;
+    private RecyclerView                rvToDoList;
+    private TextView                    textViewYearDisplay;
+    private TextView                    textViewMonthDisplay;
+    private TextView                    textViewWeekDisplay;
+    private TextView                    monthCalendarView;
+    private TextView                    weekCalendarView;
+    private CircleTextView              today;
+    private CalendarView[]              viewsMonth;
     private CalendarView.OnCellCallBack mCallback;
     private int mCurrentPage = MonthPager.CURRENT_DAY_INDEX;
     private CustomDate lastClickCustomDate;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+       /* Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);*/
         textViewYearDisplay = (TextView) findViewById(R.id.show_year_view);
         textViewMonthDisplay = (TextView) findViewById(R.id.show_month_view);
         textViewWeekDisplay = (TextView) findViewById(R.id.show_week_view);
         monthCalendarView = (TextView) this.findViewById(R.id.month_calendar_button);
         weekCalendarView = (TextView) this.findViewById(R.id.week_calendar_button);
         today = (CircleTextView) findViewById(R.id.now_circle_view);
-
         mViewPager = (MonthPager) this.findViewById(R.id.vp_calendar);
-
+        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+        int screenWidth = displayMetrics.widthPixels;
+        CoordinatorLayout.LayoutParams layoutParams = new CoordinatorLayout.LayoutParams
+                (ViewGroup.LayoutParams.MATCH_PARENT, screenWidth / 7 * 6);
+        mViewPager.setLayoutParams(layoutParams);
         rvToDoList = (RecyclerView) findViewById(R.id.list);
         rvToDoList.setHasFixedSize(true);
         rvToDoList.setLayoutManager(new LinearLayoutManager(this));//这里用线性显示 类似于listview
         rvToDoList.setAdapter(new NormalRecyclerViewAdapter(this));
-        
+
         mCallback = new CalendarView.OnCellCallBack() {
             @Override
             public void clickDate(CustomDate date) {
@@ -66,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void clickDatePosition(CustomDate date, CalendarView.State state) {
                 lastClickCustomDate = date;
-                switch (state){
+                switch (state) {
                     case CURRENT_MONTH_DAY:
                         break;
                     case PAST_MONTH_DAY:
@@ -103,9 +109,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         viewsMonth = new CalendarView[3];
         for (int i = 0; i < 3; i++) {
-            viewsMonth[i] = new CalendarView(this,
-                    CalendarView.MONTH_STYLE,
-                    mCallback);
+            viewsMonth[i] = new CalendarView(this, CalendarView.MONTH_STYLE, mCallback);
         }
 
         adapter = new CalendarViewAdapter<CalendarView>(viewsMonth);
@@ -147,15 +151,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 mCurrentPage = position;
                 mShowViews = adapter.getAllItems();
 
-                if(mShowViews[position % mShowViews.length] instanceof CalendarView){
+                if (mShowViews[position % mShowViews.length] instanceof CalendarView) {
                     CustomDate date = mShowViews[position % mShowViews.length].getmShowDate();
                     textViewYearDisplay.setText(date.getYear() + "");
                     textViewMonthDisplay.setText(date.getMonth() + "月");
                     textViewWeekDisplay.setText(date.getDisplayWeek(date.getWeek()) + "");
-                    if(lastClickCustomDate != null){
+                    if (lastClickCustomDate != null) {
                         mShowViews[position % mShowViews.length].setSelect(lastClickCustomDate);
                         lastClickCustomDate = null;
-                    }else {
+                    } else {
                         //mShowViews[position % mShowViews.length].setSelect(date);
                     }
                 }
