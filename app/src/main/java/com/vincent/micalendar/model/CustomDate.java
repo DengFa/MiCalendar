@@ -3,9 +3,9 @@
  * wb-lijinwei.a@alibaba-inc.com
  */
 
-package com.example.wb_lijinweia.mockmicalendar.micalendar.model;
+package com.vincent.micalendar.model;
 
-import com.example.wb_lijinweia.mockmicalendar.micalendar.utils.DateUtil;
+import com.vincent.micalendar.utils.DateUtil;
 
 import java.io.Serializable;
 public class CustomDate implements Serializable{

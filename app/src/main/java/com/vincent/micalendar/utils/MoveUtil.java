@@ -3,7 +3,7 @@
  * wb-lijinwei.a@alibaba-inc.com
  */
 
-package com.example.wb_lijinweia.mockmicalendar.micalendar.utils;
+package com.vincent.micalendar.utils;
 
 import android.view.View;
 

@@ -3,7 +3,7 @@
  * wb-lijinwei.a@alibaba-inc.com
  */
 
-package com.example.wb_lijinweia.mockmicalendar.micalendar.views;
+package com.vincent.micalendar.views;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -15,9 +15,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
 
-import com.example.wb_lijinweia.mockmicalendar.micalendar.model.CustomDate;
-import com.example.wb_lijinweia.mockmicalendar.micalendar.utils.DateUtil;
-import com.example.wb_lijinweia.mockmicalendar.micalendar.utils.LunarCalendar;
+import com.vincent.micalendar.model.CustomDate;
+import com.vincent.micalendar.utils.DateUtil;
+import com.vincent.micalendar.utils.LunarCalendar;
 
 public class CalendarView extends View {
 	private static final String TAG = "CalendarView";

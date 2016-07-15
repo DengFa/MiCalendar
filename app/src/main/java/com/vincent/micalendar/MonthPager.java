@@ -1,15 +1,17 @@
-package com.example.wb_lijinweia.mockmicalendar.micalendar;
+package com.vincent.micalendar;
 
 import android.content.Context;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 @CoordinatorLayout.DefaultBehavior(MonthPager.Behavior.class)
 public class MonthPager extends ViewPager {
-    public static int CURRENT_DAY_INDEX = 1000;
+    private static final String TAG               = MonthPager.class.getSimpleName();
+    public static        int    CURRENT_DAY_INDEX = 1000;
     private int selectedIndex;
     private int mCellSpace;
 
@@ -30,6 +32,7 @@ public class MonthPager extends ViewPager {
      * 日历一行是7个元素，先计算行数，如果是第0天，则计算出来为0，返回0；如果是第8天，计算结果是1，返回100,
      */
     public int getTopMovableDistance() {
+        Log.d(TAG, "getTopMovableDistance selectedIndex: " + selectedIndex);
         int rowCount = selectedIndex / 7;
         return getHeight() / 6 * rowCount;
     }
@@ -44,22 +47,24 @@ public class MonthPager extends ViewPager {
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
+        Log.d(TAG, "onLayout: " + String.format("l=%s, t = %s, r = %s, b=%s", l, t, r, b));
         super.onLayout(changed, l, t, r, b);
     }
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-        System.out.println(String.format("w=%s, h = %s, oldw = %s, oldh=%s", w,h, oldw,oldh));
+        Log.d(TAG, "onSizeChanged: " + String.format("w=%s, h = %s, oldw = %s, oldh=%s", w, h, oldw, oldh));
         mCellSpace = Math.min(h / 6, w / 7);
         super.onSizeChanged(w, h, oldw, oldh);
     }
 
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        if(mCellSpace > 0){
-            super.onMeasure(widthMeasureSpec,MeasureSpec.makeMeasureSpec(mCellSpace * 6,
+        Log.d(TAG, "onMeasure");
+        if (mCellSpace > 0) {
+            super.onMeasure(widthMeasureSpec, MeasureSpec.makeMeasureSpec(mCellSpace * 6,
                     MeasureSpec.EXACTLY));
-        }else {
-            super.onMeasure(widthMeasureSpec,heightMeasureSpec);
+        } else {
+            super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         }
     }
 
@@ -74,6 +79,7 @@ public class MonthPager extends ViewPager {
         @Override
         public boolean onLayoutChild(CoordinatorLayout parent, MonthPager child, int layoutDirection) {
             parent.onLayoutChild(child, layoutDirection);
+            Log.d(TAG, "onLayoutChild mTop:" + mTop);
             child.offsetTopAndBottom(mTop);
             return true;
         }
@@ -82,21 +88,22 @@ public class MonthPager extends ViewPager {
 
         @Override
         public boolean onDependentViewChanged(CoordinatorLayout parent, MonthPager child, View dependency) {
+            Log.d(TAG, "onDependentViewChanged dependentViewTop:" + dependentViewTop);
             if (dependentViewTop != -1) {
                 int dy = dependency.getTop() - dependentViewTop;    //dependency对其依赖的view(本例依赖的view是RecycleView)
                 int top = child.getTop();
-                if (dy > -top){
+                if (dy > -top) {
                     dy = -top;
                 }
-
-                if (dy < -top - child.getTopMovableDistance()){
+                if (dy < -top - child.getTopMovableDistance()) {
                     dy = -top - child.getTopMovableDistance();
                 }
-
                 child.offsetTopAndBottom(dy);
             }
             dependentViewTop = dependency.getTop(); //dependency
             mTop = child.getTop();
+            Log.d(TAG, "onDependentViewChanged dependentViewTop:" + dependentViewTop);
+            Log.d(TAG, "onDependentViewChanged mTop:" + mTop);
             return true;
         }
     }

@@ -3,16 +3,16 @@
  * wb-lijinwei.a@alibaba-inc.com
  */
 
-package com.example.wb_lijinweia.mockmicalendar.micalendar.adpter;
+package com.vincent.micalendar.adpter;
 
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.wb_lijinweia.mockmicalendar.micalendar.MonthPager;
-import com.example.wb_lijinweia.mockmicalendar.micalendar.model.CustomDate;
-import com.example.wb_lijinweia.mockmicalendar.micalendar.views.CalendarView;
+import com.vincent.micalendar.MonthPager;
+import com.vincent.micalendar.model.CustomDate;
+import com.vincent.micalendar.views.CalendarView;
 
 public class CalendarViewAdapter<V extends View> extends PagerAdapter {
 	public static final String TAG = "CalendarViewAdapter";

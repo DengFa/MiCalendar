@@ -1,4 +1,4 @@
-package com.example.wb_lijinweia.mockmicalendar.micalendar;
+package com.vincent.micalendar;
 
 import android.content.Context;
 import android.support.design.widget.CoordinatorLayout;
@@ -8,7 +8,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Scroller;
 
-import com.example.wb_lijinweia.mockmicalendar.micalendar.utils.MoveUtil;
+import com.vincent.micalendar.utils.MoveUtil;
 
 public class EventListBehavior extends CoordinatorLayout.Behavior<RecyclerView> {
     private int mInitialOffset = -1;

@@ -1,4 +1,4 @@
-package com.example.wb_lijinweia.mockmicalendar;
+package com.vincent.micalendar;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -13,16 +13,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import com.example.wb_lijinweia.mockmicalendar.micalendar.views.CalendarView;
-import com.example.wb_lijinweia.mockmicalendar.micalendar.adpter.CalendarViewAdapter;
-import com.example.wb_lijinweia.mockmicalendar.micalendar.model.CustomDate;
-import com.example.wb_lijinweia.mockmicalendar.micalendar.MonthPager;
-import com.example.wb_lijinweia.mockmicalendar.micalendar.adpter.NormalRecyclerViewAdapter;
-import com.example.wb_lijinweia.mockmicalendar.micalendar.views.CircleTextView;
+import com.vincent.micalendar.adpter.CalendarViewAdapter;
+import com.vincent.micalendar.adpter.NormalRecyclerViewAdapter;
+import com.vincent.micalendar.model.CustomDate;
+import com.vincent.micalendar.views.CalendarView;
+import com.vincent.micalendar.views.CircleTextView;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    private MonthPager mViewPager;
-    private CalendarView[] mShowViews;
+    private MonthPager                        mViewPager;
+    private CalendarView[]                    mShowViews;
     private CalendarViewAdapter<CalendarView> adapter;
 
     private RecyclerView rvToDoList;
