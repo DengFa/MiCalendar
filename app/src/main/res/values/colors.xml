@@ -3,6 +3,11 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="date_1">#F24949</color>
-    <color name="date_2">#40000000</color>
+    <color name="date_1">#1c95f3</color>
+    <color name="date_2">#666666</color>
+    <color name="data_circle">#1c95f3</color>
+    <color name="data_mark">#ff6600</color>
+    <color name="data_current_month_day">#666666</color>
+    <color name="data_other_month_day">#cccccc</color>
+    <color name="data_month_day_selected">#ffffff</color>
 </resources>
